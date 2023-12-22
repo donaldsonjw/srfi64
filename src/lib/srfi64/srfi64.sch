@@ -73,7 +73,6 @@
 	       (%test-on-test-end r res))))
        (%test-report-result)))))
 
-
 (define-syntax test-end
    (syntax-rules ()
       ((test-end)
@@ -104,6 +103,12 @@
        (let* ((r (test-runner-get)))
           (test-result-alist! r '())
           (%test-comp2body r comp expected expr)))))
+
+;; alias for test-equal
+(define-syntax test
+   (syntax-rules ()
+      ((test . rest)
+       (%test-comp2 equal? . rest))))
 
 (define-syntax test-equal
    (syntax-rules ()
